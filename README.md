@@ -19,6 +19,9 @@ $ yarn generate
 # vue3 실행이 않될때
 # export NODE_OPTIONS=--openssl-legacy-provider
 
+HOST=172.30.1.15 yarn dev 
+php artisan serve --host 172.30.1.15
+
 docker ps
 docker ps -a
 docker images

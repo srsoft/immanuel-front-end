@@ -46,8 +46,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    // baseURL: 'http://172.30.1.15:8000/api'
-    baseURL: 'http://www.immanuel.live:8000/api'
+    baseURL: 'http://localhost:8002/api'
+    // baseURL: 'http://www.immanuel.live:8000/api'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -55,15 +55,15 @@ export default {
   },
 
   server: {
-    port: 3000
+    port: 8001
   },
 
   auth: {
     strategies: {
       laravelSanctum: {
         provider: 'laravel/sanctum',
-        // url: 'http://localhost:8000',
-        url: 'http://www.immanuel.live:8000',
+        url: 'http://localhost:8002',
+        // url: 'http://www.immanuel.live:8000',
         endpoints: {
           login: { url: '/api/login' },
           logout: { url: '/api/logout' },
