@@ -1,16 +1,16 @@
 <template>
   <v-container>
-    <h1>회원가입</h1>
-    <UserAuthForm button-text="가입" :submit-form="registerUser" has-name="true" />
+    <h1>교회등록</h1>
+    <ChurchAuthForm button-text="등록" :submit-form="registerUser" has-name="true" />
   </v-container>
 </template>
 
 <script>
-import UserAuthForm from '@/components/UserAuthForm.vue'
+import ChurchAuthForm from '@/components/ChurchAuthForm.vue'
 export default {
   name: 'RegisterPage',
   components: {
-    UserAuthForm
+    ChurchAuthForm
   },
   layout: 'blank',
   methods: {

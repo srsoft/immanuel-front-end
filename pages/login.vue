@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <h1>Login</h1>
-    <UserAuthForm button-text="Login" :submit-form="loginUser" />
+    <h1>로그인</h1>
+    <UserAuthForm button-text="로그인" :submit-form="loginUser" />
   </v-container>
 </template>
 
@@ -12,6 +12,7 @@ export default {
   components: {
     UserAuthForm
   },
+  layout: 'blank',
   created () {
     if (this.$auth.loggedIn) {
       this.$router.push('/')
