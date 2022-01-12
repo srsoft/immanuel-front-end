@@ -1,3 +1,16 @@
 <template>
-  <router-view />
+  <div>
+    <div>router</div>
+    <router-view />
+  </div>
 </template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
