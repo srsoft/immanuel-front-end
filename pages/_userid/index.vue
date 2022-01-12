@@ -6,6 +6,7 @@
       </v-btn>
     </v-content> -->
     <v-content>
+      {{ roomId }}
       <vue-webrtc ref="webrtc" width="100%" :room-id="roomId" />
       <!-- <v-text-field v-model="roomId" placeholder="Enter room ID" /> -->
       <v-btn @click="toggleRoom">
@@ -26,19 +27,21 @@
 <script>
 import Vue from 'vue'
 import WebRTC from 'vue-webrtc'
-
 Vue.use(WebRTC)
 export default {
   name: 'AdminPage',
   // middleware: ['auth-admin']
-  data () {
+  // data () {
+  //   return {
+  //     roomId: this.$route.params.userid,
+  //     hasJoined: false
+  //   }
+  // },
+  asyncData ({ params }) {
     return {
-      roomId: this.$route.params.userid,
+      roomId: params.userid,
       hasJoined: false
     }
-  },
-  mounted () {
-
   },
   methods: {
     toggleRoom () {
