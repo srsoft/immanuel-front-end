@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <v-content v-if="$auth.loggedIn">
+    <!-- <v-content v-if="$auth.loggedIn">
       <v-btn v-if="$auth.user.userid === $route.params.userid">
         방송하기
       </v-btn>
-    </v-content>
+    </v-content> -->
     <v-content>
       <vue-webrtc ref="webrtc" width="100%" :room-id="roomId" />
       <!-- <v-text-field v-model="roomId" placeholder="Enter room ID" /> -->
