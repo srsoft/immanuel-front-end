@@ -1,9 +1,7 @@
 <template>
   <v-container v-if="!$auth.loggedIn">
     <v-content>
-      <v-row class="mt-10"><h1>immanuel.live</h1></v-row>
-      <v-row class="mt-10"><v-btn to="/login">로그인</v-btn></v-row>
-      <v-row class="mt-10"><v-btn to="/register">회원가입</v-btn></v-row>
+      <v-row class="mt-10"><h1>임마누엘 라이브</h1></v-row>
       <v-row class="mt-10"><v-btn to="/churchRegistration">교회등록</v-btn></v-row>
     </v-content>
   </v-container>
