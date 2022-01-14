@@ -8,7 +8,7 @@
   <v-container v-else class="home">
     <h1>immanuel.live</h1>
     <div>good news</div>
-    <div class="visual-image"><v-img src="https://cdn.faithgateway.com/uploads/2013/12/immanuel-god-with-us.jpg" /></div>
+    <div class="visual-image text-center">visual image</div>
 
     <div class="d-flex flex-wrap">
       <!-- <div v-for="video in videos" :key="video.name">

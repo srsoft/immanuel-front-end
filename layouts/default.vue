@@ -1,16 +1,5 @@
 <template>
   <v-app id="inspire">
-    <!-- <v-navigation-drawer v-model="drawer" app>
-      <v-btn text to="/"><h1>immanuel.live</h1></v-btn>
-      <v-avatar
-        color="orange"
-        size="100"
-      >
-        <span class="white--text text-h5">100</span>
-      </v-avatar>
-      <v-btn text @click="$auth.logout()">Logout</v-btn>
-    </v-navigation-drawer> -->
-
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -23,18 +12,23 @@
         </v-list-item-title>
         <v-list-item class="d-flex justify-center mt-6">
           <v-list-item-avatar>
-            <v-img src="https://randomuser.me/api/portraits/women/85.jpg" />
+            <v-img src="https://randomuser.me/api/portraits/women/85.jpg" class="d-flex justify-center" />
           </v-list-item-avatar>
         </v-list-item>
 
-        <v-list-item link>
-          <v-list-item-content>
+        <v-list-item link :to="`/${$auth.user.userid}`">
+          <v-list-item-content v-if="$auth.loggedIn">
             <v-list-item-title class="text-h6 d-flex justify-center">
-              Sandra Adams
+              {{ $auth.user.userid }}
             </v-list-item-title>
             <v-list-item-subtitle class="d-flex justify-center">
-              sandra_a88@gmail.com
+              {{ $auth.user.email }}
             </v-list-item-subtitle>
+          </v-list-item-content>
+          <v-list-item-content v-else>
+            <v-btn block to="/login">
+              Login
+            </v-btn>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -45,23 +39,30 @@
         nav
         dense
       >
-        <v-list-item link>
+        <v-list-item link :to="`/${$auth.user.userid}/note`">
           <v-list-item-icon>
-            <v-icon>mdi-folder</v-icon>
+            <v-icon>mdi-note</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>마음담은 메시지</v-list-item-title>
+          <v-list-item-title>메시지 노트</v-list-item-title>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link :to="`/${$auth.user.userid}/challenge`">
           <v-list-item-icon>
             <v-icon>mdi-account-multiple</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>전도현황</v-list-item-title>
+          <v-list-item-title>70인 첼린지</v-list-item-title>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link :to="`/${$auth.user.userid}/favorites`">
           <v-list-item-icon>
             <v-icon>mdi-star</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>즐겨찾기</v-list-item-title>
+          <v-list-item-title>말씀 즐겨찾기</v-list-item-title>
+        </v-list-item>
+      </v-list>
+      <v-divider />
+      <v-list nav dense>
+        <v-list-item link :to="`/${$auth.user.userid}/preparation`">
+          <v-list-item-icon><v-icon>mdi-application-cog-outline</v-icon></v-list-item-icon>
+          <v-list-item-title>예배준비</v-list-item-title>
         </v-list-item>
       </v-list>
       <template #append>
@@ -79,7 +80,6 @@
     <v-app-bar elevation="0" color="gray" app>
       <v-app-bar-nav-icon @click="drawer = !drawer" />
       <v-toolbar-title>24예배하는교회</v-toolbar-title>
-      <!-- <v-btn v-if="$auth.user" text to="/admin">Admin</v-btn> -->
       <v-spacer />
       <div v-if="$auth.loggedIn">
         <v-btn
@@ -121,5 +121,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.v-application--is-ltr .v-list-item__avatar:first-child {
+  margin-right: 0px;
+}
 </style>
