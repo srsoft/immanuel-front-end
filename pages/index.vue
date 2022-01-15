@@ -1,9 +1,9 @@
 <template>
   <v-container v-if="!$auth.loggedIn">
-    <v-content>
+    <v-main>
       <v-row class="mt-10"><h1>임마누엘 라이브</h1></v-row>
       <v-row class="mt-10"><v-btn to="/churchRegistration">교회등록</v-btn></v-row>
-    </v-content>
+    </v-main>
   </v-container>
   <v-container v-else class="home">
     <h1>immanuel.live</h1>

@@ -16,7 +16,7 @@
           </v-list-item-avatar>
         </v-list-item>
 
-        <v-list-item link :to="`/${$auth.user.userid}`">
+        <v-list-item link>
           <v-list-item-content v-if="$auth.loggedIn">
             <v-list-item-title class="text-h6 d-flex justify-center">
               {{ $auth.user.userid }}
@@ -35,36 +35,31 @@
 
       <v-divider />
 
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item link :to="`/${$auth.user.userid}/note`">
-          <v-list-item-icon>
-            <v-icon>mdi-note</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>메시지 노트</v-list-item-title>
-        </v-list-item>
-        <v-list-item link :to="`/${$auth.user.userid}/challenge`">
-          <v-list-item-icon>
-            <v-icon>mdi-account-multiple</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>70인 첼린지</v-list-item-title>
-        </v-list-item>
-        <v-list-item link :to="`/${$auth.user.userid}/favorites`">
-          <v-list-item-icon>
-            <v-icon>mdi-star</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>말씀 즐겨찾기</v-list-item-title>
-        </v-list-item>
-      </v-list>
-      <v-divider />
       <v-list nav dense>
-        <v-list-item link :to="`/${$auth.user.userid}/preparation`">
-          <v-list-item-icon><v-icon>mdi-application-cog-outline</v-icon></v-list-item-icon>
-          <v-list-item-title>예배준비</v-list-item-title>
+        <v-list-item v-for="(item, index) in listItemMenu1" :key="index" :to="$auth.loggedIn ? '/' + $auth.user.userid + item.to : ''">
+          <v-list-item-icon><v-icon>{{ item.icon }}</v-icon></v-list-item-icon>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
+
+      <v-divider />
+
+      <v-list nav dense>
+        <v-list-item v-for="(item, index) in listItemMenu2" :key="index" :to="$auth.loggedIn ? '/' + $auth.user.userid + item.to : ''">
+          <v-list-item-icon><v-icon>{{ item.icon }}</v-icon></v-list-item-icon>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+
+      <v-divider />
+
+      <v-list nav dense>
+        <v-list-item v-for="(item, index) in listItemMenu3" :key="index" :to="'/services' + item.to">
+          <v-list-item-icon><v-icon>{{ item.icon }}</v-icon></v-list-item-icon>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+
       <template #append>
         <div class="pa-2">
           <v-btn v-if="$auth.loggedIn" block @click="$auth.logout()">
@@ -113,10 +108,28 @@
 <script>
 export default {
   name: 'LayoutDefault',
+  // asyncData ({ params }) {
   data () {
     return {
-      drawer: null
+      drawer: null,
+      listItemMenu1: [
+        { icon: 'mdi-note', title: '메시지 노트', to: '/note' },
+        { icon: 'mdi-account-multiple', title: '70인 첼린지', to: '/challenge' },
+        { icon: 'mdi-star', title: '말씀 즐겨찾기', to: '/favorites' }
+      ],
+      listItemMenu2: [
+        { icon: 'mdi-application-cog-outline', title: '예배준비', to: '/preparation' }
+      ],
+      listItemMenu3: [
+        { icon: 'mdi-application-cog-outline', title: 'Services', to: '/' },
+        { icon: 'mdi-application-cog-outline', title: 'Teams', to: '/teams' },
+        { icon: 'mdi-application-cog-outline', title: 'Our Works', to: '/ourworks' },
+        { icon: 'mdi-application-cog-outline', title: 'Clients', to: '/clients' },
+        { icon: 'mdi-application-cog-outline', title: 'Pages', to: '/pages' }
+      ]
     }
+  },
+  methods: {
   }
 }
 </script>

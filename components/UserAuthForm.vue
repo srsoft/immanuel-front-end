@@ -87,6 +87,7 @@ export default {
         church: '',
         officer: ''
       },
+      showPassword: false,
       ...validations
     }
   }
