@@ -54,7 +54,7 @@
       <v-divider />
 
       <v-list nav dense>
-        <v-list-item v-for="(item, index) in listItemMenu3" :key="index" :to="'/services' + item.to">
+        <v-list-item v-for="(item, index) in listItemMenu3" :key="index" :to="'/cms' + item.to">
           <v-list-item-icon><v-icon>{{ item.icon }}</v-icon></v-list-item-icon>
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
@@ -121,7 +121,7 @@ export default {
         { icon: 'mdi-application-cog-outline', title: '예배준비', to: '/preparation' }
       ],
       listItemMenu3: [
-        { icon: 'mdi-application-cog-outline', title: 'Services', to: '/' },
+        { icon: 'mdi-application-cog-outline', title: 'Services', to: '/services' },
         { icon: 'mdi-application-cog-outline', title: 'Teams', to: '/teams' },
         { icon: 'mdi-application-cog-outline', title: 'Our Works', to: '/ourworks' },
         { icon: 'mdi-application-cog-outline', title: 'Clients', to: '/clients' },

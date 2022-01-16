@@ -1,5 +1,10 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://172.30.1.15:8003',
+    imageUrl: process.env.IMAGE_URL || 'http://172.30.1.15:8003/storage/',
+    moduleUrl: process.env.MODULE_URL || 'http://172.30.1.15:8003/api/module/'
+  },
   ssr: false,
   head: {
     title: 'immanuel live',
@@ -24,6 +29,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '@/plugins/images'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -33,7 +39,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/dotenv'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -79,10 +86,10 @@ export default {
         }
       }
     }
-  },
+  }
 
-  serverMiddleware: [
-    { path: '/api', handler: '~/api/index.js' }
-  ]
+  // serverMiddleware: [
+  //   { path: '/api', handler: '~/api/index.js' }
+  // ]
 
 }

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1>ClientsPage</h1>
+    <h1>ServicesPage ({{ total }})</h1>
     <v-card>
       <v-col v-for="(row, index) in rows" :key="index">
         <v-progress-circular
@@ -8,7 +8,13 @@
           indeterminate
           color="red"
         />
-        <v-img v-else :src="`http://172.30.1.15:8003/storage/${row.image}`" max-width="300" />
+        <v-col v-else>
+          <v-avatar>
+            <v-img :src="$images(row.image, 'small')" />
+          </v-avatar>
+          <p>{{ row.name }}</p>
+          <v-btn :to="'/cms/services/' + row.id">detail</v-btn>
+        </v-col>
       </v-col>
     </v-card>
     <template v-if="currentPage != lastPage">
@@ -24,15 +30,15 @@
 
 <script>
 export default {
-  name: 'ClientsPage',
+  name: 'ServicesPage',
   data () {
     return {
       rows: [],
-      loading: false,
+      loading: true,
       lastPage: 1,
       nextUrl: '',
       currentPage: 0,
-      url: ''
+      total: 0
     }
   },
   mounted () {
@@ -41,20 +47,20 @@ export default {
   methods: {
     fetchData () {
       this.loading = true
-      this.url = 'http://172.30.1.15:8003/api/module/clients'
+      let url = process.env.MODULE_URL + 'services'
       if (this.nextUrl !== '' && this.nextUrl !== null) {
-        this.url = this.nextUrl
+        url = this.nextUrl
       }
-      this.$axios.$get(this.url).then((res) => {
+      this.$axios.$get(url).then((res) => {
         if (this.rows.length > 0) {
           this.rows = [...this.rows, ...res.payload.data]
         } else {
           this.rows = res.payload.data
         }
-        console.log(res)
         this.nextUrl = res.payload.next_page_url
         this.lastPage = res.payload.last_page
         this.currentPage = res.payload.current_page
+        this.total = res.payload.total
         this.loading = false
       })
     }
