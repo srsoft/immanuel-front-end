@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <h1>TeamsPage ({{ total }})</h1>
+    <v-card>
+      <h1>TeamsPage ({{ total }})</h1>
+      <v-btn to="teams/write">write</v-btn>
+    </v-card>
     <v-card>
       <v-row block v-for="(row, index) in rows" :key="index">
         <v-progress-circular
@@ -10,10 +13,11 @@
         />
         <v-col v-else>
           <v-avatar>
-            <v-img :src="$images(row.image, 'small')" />
+            <v-img v-if="row.image" :src="$images(row.image, 'small')" />
           </v-avatar>
+          <p>{{ row.name }}</p>
           <p>{{ row.job_title }}</p>
-          <nuxt-link :to="row.LinkedIn">LinkedIn</nuxt-link>
+          <v-btn :to="$route.path + '/' + row.id">detail</v-btn>
         </v-col>
       </v-row>
     </v-card>
@@ -47,7 +51,7 @@ export default {
   methods: {
     fetchData () {
       this.loading = true
-      let url = process.env.MODULE_URL + 'teams'
+      let url = process.env.BASE_URL + '/api/teams'
       if (this.nextUrl !== '' && this.nextUrl !== null) {
         url = this.nextUrl
       }

@@ -38,7 +38,7 @@
     <v-text-field
       v-if="hasName"
       v-model="userInfo.church"
-      label="섬기는 교회"
+      label="섬기는 교회명"
       :rules="[required('church', '섬기는 교회를 입력해주세요!')]"
       class="mt-10"
     />

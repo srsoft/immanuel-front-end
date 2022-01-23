@@ -113,7 +113,7 @@ export default {
     return {
       drawer: null,
       listItemMenu1: [
-        { icon: 'mdi-note', title: '메시지 노트', to: '/note' },
+        { icon: 'mdi-note', title: '메시지 노트', to: '/notes' },
         { icon: 'mdi-account-multiple', title: '70인 첼린지', to: '/challenge' },
         { icon: 'mdi-star', title: '말씀 즐겨찾기', to: '/favorites' }
       ],
@@ -125,7 +125,8 @@ export default {
         { icon: 'mdi-application-cog-outline', title: 'Teams', to: '/teams' },
         { icon: 'mdi-application-cog-outline', title: 'Our Works', to: '/ourworks' },
         { icon: 'mdi-application-cog-outline', title: 'Clients', to: '/clients' },
-        { icon: 'mdi-application-cog-outline', title: 'Pages', to: '/pages' }
+        { icon: 'mdi-application-cog-outline', title: 'Pages', to: '/pages' },
+        { icon: 'mdi-application-cog-outline', title: 'Contact', to: '/contact' }
       ]
     }
   },

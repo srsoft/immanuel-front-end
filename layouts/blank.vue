@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app flat color="white">
-      <v-btn text to="/">임마누엘 라이브1</v-btn>
+      <v-btn text to="/">임마누엘 라이브</v-btn>
       <v-spacer />
       <div>
         <v-btn v-if="$route.name !== 'login'" text to="/login">로그인</v-btn>

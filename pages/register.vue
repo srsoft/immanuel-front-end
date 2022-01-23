@@ -14,11 +14,19 @@ export default {
   },
   layout: 'blank',
   methods: {
-    async registerUser (registrationInfo) {
+    registerUser (registrationInfo) {
       console.log('registrationInfo:', registrationInfo)
-      await this.$axios.post('/register', registrationInfo)
-      this.$auth.loginWith('laravelSanctum', {
-        data: registrationInfo
+      const url = process.env.baseUrl + '/api/register'
+      this.$axios.post(url, registrationInfo).then((res) => {
+        console.log('res:::', res.status)
+        if (res.status === 201) {
+          this.$auth.loginWith('laravelSanctum', {
+            data: registrationInfo
+          })
+        } else {
+          alert(res.data.message)
+          console.log('res:', res.data.field)
+        }
       })
     }
   }
