@@ -38,11 +38,13 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
+
 export default {
   name: 'NotesPage',
   data () {
     return {
-      rows: [],
+      // rows: [],
       loading: false,
       lastPage: 1,
       nextUrl: '',
@@ -57,7 +59,13 @@ export default {
     }
   },
   mounted () {
-    this.fetchData()
+    // this.fetchData()
+    this.getNoteItemList
+  },
+  computed: {
+    ...mapGetters({
+      rows: 'note/item/itemList'
+    })
   },
   methods: {
     fetchData () {
@@ -81,7 +89,12 @@ export default {
     },
     rowClick (item) {
       this.$router.push(this.$route.path + '/' + item.id)
-    }
+    },
+    ...mapActions({
+      getNoteItemList : 'note/item/getNoteItemList'
+    }),
+    ...mapMutations({
+    })
   }
 }
 </script>
