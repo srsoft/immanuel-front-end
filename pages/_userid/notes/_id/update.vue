@@ -4,9 +4,9 @@
       수정
     </h1>
     <v-form class="mb-10">
-      <v-text-field v-model="user_id" label="user_id" />
-      <v-text-field v-model="title" label="title" />
-      <v-textarea v-model="context" label="context" />
+      <v-text-field v-model="item.user_id" label="user_id" />
+      <v-text-field v-model="item.title" label="title" />
+      <v-textarea v-model="item.context" label="context" />
     </v-form>
     <v-row class="d-flex justify-center">
       <v-btn outlined small class="ma-1" @click.prevent="onUpdate">
@@ -16,68 +16,46 @@
         취소
       </v-btn>
     </v-row>
-    <v-snackbar
-      v-model="snackbar"
-    >
-      {{ snackbarText }}
-    </v-snackbar>
   </v-container>
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
+
 export default {
   name: 'UpdatePage',
   data () {
     return {
-      loading: false,
-
-      row: {},
-      user_id: '',
-      title: '',
-      context: '',
-
-      response: [],
-      snackbar: false,
-      snackbarText: 'hello world'
+      item: {}
     }
   },
+  computed: {
+    ...mapGetters({
+      row: 'note/getItemShow'
+    }),
+    ...mapState({
+    })
+  },
   mounted () {
-    this.fetchData()
+    this.getNoteShow(this.$route.params.id)
+    this.item = this.row
   },
   methods: {
-    fetchData () {
-      this.loading = true
-      const url = process.env.BASE_URL + '/api/notes/' + this.$route.params.id
-      this.$axios.$get(url).then((res) => {
-        this.row = res.payload
-        this.user_id = this.row.user_id
-        this.title = this.row.title
-        this.context = this.row.context
-        this.loading = false
-      })
-    },
-    async onUpdate () {
-      this.loading = true
-      const url = process.env.baseUrl + '/api/notes/' + this.$route.params.id + '?_method=PUT'
-      const data = {
-        user_id: this.user_id,
-        title: this.title,
-        context: this.context
-      }
-      await this.$axios.post(url, data).then((res) => {
-        this.response = res.data
-        if (this.response.status === true) {
-          this.snackbar = true
-          this.snackbarText = 'OK!'
+    onUpdate () {
+      this.updateNote(this.item).then((res) => {
+        if (res.status === true) {
           this.$router.push({
             path: '.'
           })
-        } else {
-          this.snackbar = true
-          this.snackbarText = 'Err!'
         }
       })
-    }
+    },
+    ...mapActions({
+      getNoteShow: 'note/getNoteShow',
+      updateNote: 'note/updateNote'
+    }),
+    ...mapMutations({
+    })
   }
 }
 </script>

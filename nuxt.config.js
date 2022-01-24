@@ -31,7 +31,7 @@ export default {
   plugins: [
     '@/plugins/images',
     '@/plugins/moment',
-    '@/plugins/service',
+    '@/plugins/service'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -53,11 +53,15 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  // axios: {
-  //   // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-  //   baseURL: 'http://172.30.1.15:8003/api'
-  //   // baseURL: 'http://www.immanuel.live:8000/api'
-  // },
+  axios: {
+    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+    baseURL: 'http://172.30.1.15:8003/api',
+    proxy: true
+    // baseURL: 'http://www.immanuel.live:8000/api'
+  },
+  proxy: {
+    '/api/': 'http://172.30.1.15:8003/'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

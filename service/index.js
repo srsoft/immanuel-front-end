@@ -1,5 +1,5 @@
-import noteItem from './note/item'
+import note from './note.js'
 
-export default ( $axios ) => ({
-    noteItem : noteItem ( $axios )
+export default $axios => ({
+  note: note($axios)
 })

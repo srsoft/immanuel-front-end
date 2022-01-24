@@ -1,5 +1,5 @@
-import createServiceApi from '/service'
+import createServiceApi from '@/service'
 
-export default (ctx , inject) => {
-    inject('serviceApi', createServiceApi( ctx.$axios ))
+export default (ctx, inject) => {
+  inject('serviceApi', createServiceApi(ctx.$axios))
 }

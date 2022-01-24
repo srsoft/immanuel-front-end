@@ -2,9 +2,9 @@
   <v-container class="pa-10">
     <h1>write</h1>
     <v-form class="mb-10">
-      <v-text-field v-model="user_id" label="user id" />
-      <v-text-field v-model="title" label="title" />
-      <v-textarea v-model="context" label="context" />
+      <v-text-field v-model="form.user_id" label="user id" />
+      <v-text-field v-model="form.title" label="title" />
+      <v-textarea v-model="form.context" label="context" />
     </v-form>
     <v-row class="justify-center">
       <v-btn outlined small @click.prevent="onWrite" class="ma-1">
@@ -23,14 +23,19 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'WritePage',
   data () {
     return {
       loading: false,
-      user_id: this.$auth.user.id,
-      title: 'title',
-      context: 'context',
+
+      form: {
+        user_id: this.$auth.user.id,
+        title: 'title',
+        context: 'context'
+      },
 
       response: [],
       snackbar: false,
@@ -41,17 +46,8 @@ export default {
   },
   methods: {
     onWrite () {
-      this.loading = true
-      const url = process.env.baseUrl + '/api/notes'
-      const data = {
-        name: this.name,
-        user_id: this.user_id,
-        title: this.title,
-        context: this.context
-      }
-      this.$axios.post(url, data).then((res) => {
-        this.response = res.data
-        if (this.response.status === true) {
+      this.createNote(this.form).then((res) => {
+        if (res.status === true) {
           this.snackbar = true
           this.snackbarText = 'OK!'
           this.$router.push({
@@ -62,7 +58,10 @@ export default {
           this.snackbarText = 'Err!'
         }
       })
-    }
+    },
+    ...mapActions({
+      createNote: 'note/createNote'
+    })
   }
 }
 </script>

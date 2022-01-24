@@ -18,23 +18,21 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
+
 export default {
   name: 'NotesDetailPage',
-  data () {
-    return {
-      row: {}
-    }
+  computed: {
+    ...mapGetters({
+      row: 'note/getItemShow'
+    }),
+    ...mapState({
+    })
   },
   mounted () {
-    this.fetchData()
+    this.getNoteShow(this.$route.params.id)
   },
   methods: {
-    fetchData () {
-      const url = process.env.BASE_URL + '/api/notes/' + this.$route.params.id
-      this.$axios.$get(url).then((res) => {
-        this.row = res.payload
-      })
-    },
     async onDestroy () {
       const url = process.env.BASE_URL + '/api/notes/' + this.$route.params.id
       await this.$axios.$delete(url).then((res) => {
@@ -44,7 +42,12 @@ export default {
           })
         }
       })
-    }
+    },
+    ...mapActions({
+      getNoteShow: 'note/getNoteShow'
+    }),
+    ...mapMutations({
+    })
   }
 }
 </script>

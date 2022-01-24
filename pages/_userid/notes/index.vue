@@ -44,7 +44,6 @@ export default {
   name: 'NotesPage',
   data () {
     return {
-      // rows: [],
       loading: false,
       lastPage: 1,
       nextUrl: '',
@@ -58,40 +57,41 @@ export default {
       ]
     }
   },
-  mounted () {
-    // this.fetchData()
-    this.getNoteItemList
-  },
   computed: {
     ...mapGetters({
-      rows: 'note/item/itemList'
+      rows: 'note/getItemList'
+    }),
+    ...mapState({
     })
   },
+  mounted () {
+    this.getNoteList()
+  },
   methods: {
-    fetchData () {
-      this.loading = true
-      let url = process.env.BASE_URL + '/api/notes'
-      if (this.nextUrl !== '' && this.nextUrl !== null) {
-        url = this.nextUrl
-      }
-      this.$axios.$get(url).then((res) => {
-        if (this.rows.length > 0) {
-          this.rows = [...this.rows, ...res.payload.data]
-        } else {
-          this.rows = res.payload.data
-        }
-        this.nextUrl = res.payload.next_page_url
-        this.lastPage = res.payload.last_page
-        this.currentPage = res.payload.current_page
-        this.total = res.payload.total
-        this.loading = false
-      })
-    },
+    // fetchData () {
+    //   this.loading = true
+    //   let url = process.env.BASE_URL + '/api/notes'
+    //   if (this.nextUrl !== '' && this.nextUrl !== null) {
+    //     url = this.nextUrl
+    //   }
+    //   this.$axios.$get(url).then((res) => {
+    //     if (this.rows.length > 0) {
+    //       this.rows = [...this.rows, ...res.payload.data]
+    //     } else {
+    //       this.rows = res.payload.data
+    //     }
+    //     this.nextUrl = res.payload.next_page_url
+    //     this.lastPage = res.payload.last_page
+    //     this.currentPage = res.payload.current_page
+    //     this.total = res.payload.total
+    //     this.loading = false
+    //   })
+    // },
     rowClick (item) {
       this.$router.push(this.$route.path + '/' + item.id)
     },
     ...mapActions({
-      getNoteItemList : 'note/item/getNoteItemList'
+      getNoteList: 'note/getNoteList'
     }),
     ...mapMutations({
     })
