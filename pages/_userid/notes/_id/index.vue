@@ -33,9 +33,8 @@ export default {
     this.getNoteShow(this.$route.params.id)
   },
   methods: {
-    async onDestroy () {
-      const url = process.env.BASE_URL + '/api/notes/' + this.$route.params.id
-      await this.$axios.$delete(url).then((res) => {
+    onDestroy () {
+      this.deleteNote(this.$route.params.id).then((res) => {
         if (res.status === 204) {
           this.$router.push({
             path: './'
@@ -44,7 +43,8 @@ export default {
       })
     },
     ...mapActions({
-      getNoteShow: 'note/getNoteShow'
+      getNoteShow: 'note/getNoteShow',
+      deleteNote: 'note/deleteNote'
     }),
     ...mapMutations({
     })

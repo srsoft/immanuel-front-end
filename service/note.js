@@ -2,8 +2,8 @@ const item = '/api/notes'
 
 export default $axios => ({
 
-  list () {
-    return $axios.$get(`${item}`)
+  list (page) {
+    return $axios.$get(`${item}?page=${page}`)
   },
 
   show (id) {

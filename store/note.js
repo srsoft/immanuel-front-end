@@ -18,17 +18,18 @@ export const mutations = {
   },
   SET_ITEM_SHOW (state, itemShow) {
     state.itemShow = itemShow
-  },
-  REMOVE_ITEM_LIST (state, itemList) {
-    state.itemList = itemList
   }
+  // REMOVE_ITEM_LIST (state, itemList) {
+  //   state.itemList = itemList
+  // }
 }
 
 export const actions = {
-  async getNoteList ({ commit }, parameter) {
-    const { status, payload } = await this.$serviceApi.note.list()
+  async getNoteList ({ commit }, page) {
+    console.log('getNoteList:', page)
+    const { status, payload } = await this.$serviceApi.note.list(page)
     if (status === true) {
-      commit('SET_ITEM_LIST', payload.data)
+      commit('SET_ITEM_LIST', payload)
     }
   },
   async getNoteShow ({ commit }, id) {
@@ -42,10 +43,12 @@ export const actions = {
   },
   async updateNote ({ commit }, parameter) {
     return await this.$serviceApi.note.update(parameter.id, parameter)
+  },
+  async deleteNote ({ commit }, id) {
+    return await this.$serviceApi.note.delete(id)
+    // const { status, data } = await this.$serviceApi.note.delete(id)
+    // if (status === true) {
+    //   commit('REMOVE_ITEM_LIST', data)
+    // }
   }
-
-  // async deleteNoteItem ({ commit }, id) {
-  //   const { status, data } = await this.$serviceApi.noteItem.delete(id)
-  //   commit('REMOVE_ITEM_LIST', data)
-  // }
 }
