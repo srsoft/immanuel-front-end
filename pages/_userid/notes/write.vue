@@ -2,12 +2,20 @@
   <v-container class="pa-10">
     <h1>write</h1>
     <v-form class="mb-10">
-      <v-text-field v-model="form.user_id" label="user id" />
+      <!-- <v-text-field v-model="form.user_id" label="user id" /> -->
       <v-text-field v-model="form.title" label="title" />
       <v-textarea v-model="form.context" label="context" />
+      <v-row>{{ form.image.name }}</v-row>
+      <v-row>
+        <v-file-input
+          v-model="form.image"
+          show-size
+          prepend-icon="mdi-camera"
+        />
+      </v-row>
     </v-form>
     <v-row class="justify-center">
-      <v-btn outlined small @click.prevent="onWrite" class="ma-1">
+      <v-btn outlined small class="ma-1" @click.prevent="onWrite">
         Send Message
       </v-btn>
       <v-btn outlined small to="." class="ma-1">
@@ -34,7 +42,8 @@ export default {
       form: {
         user_id: this.$auth.user.id,
         title: 'title',
-        context: 'context'
+        context: 'context',
+        image: []
       },
 
       response: [],

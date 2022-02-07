@@ -25,9 +25,9 @@ export const mutations = {
 }
 
 export const actions = {
-  async getNoteList ({ commit }, page) {
-    console.log('getNoteList:', page)
-    const { status, payload } = await this.$serviceApi.note.list(page)
+  async getNoteList ({ commit }, v) {
+    console.log('getNoteList:', v.page, v.userid)
+    const { status, payload } = await this.$serviceApi.note.list(v.page, v.userid)
     if (status === true) {
       commit('SET_ITEM_LIST', payload)
     }

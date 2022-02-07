@@ -4,7 +4,7 @@
       수정
     </h1>
     <v-form class="mb-10">
-      <v-text-field v-model="item.user_id" label="user_id" />
+      <!-- <v-text-field v-model="item.user_id" label="user_id" /> -->
       <v-text-field v-model="item.title" label="title" />
       <v-textarea v-model="item.context" label="context" />
     </v-form>
