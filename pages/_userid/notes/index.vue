@@ -1,6 +1,6 @@
 <template>
   <v-container class="pa-10">
-    <h1>메시지 노트 {{ $route.query.page }} / {{ $auth.user.id }}</h1>
+    <h1>메시지 노트 {{ currentPage }} / {{ $route.query.page }}</h1>
     <v-row>
       <v-spacer />
       <v-btn fab dark small color="cyan" :to="$route.path + '/write'">
@@ -59,17 +59,30 @@ export default {
     ...mapState({
     })
   },
+  watch: {
+    $route (to) {
+      // 뒤로버튼을 눌렀을때
+      if (Number(to.query.page) !== this.currentPage) {
+        this.currentPage = Number(to.query.page) || 1
+        this.go()
+      }
+    }
+  },
   mounted () {
-    this.currentPage = this.$route.query.page ? this.$route.query.page : 1
-    this.getNoteList({ page: this.currentPage, userid: this.$auth.user.id })
+    this.currentPage = Number(this.$route.query.page) || 1
+    this.go()
   },
   methods: {
     rowClick (item) {
       this.$router.push(this.$route.path + '/' + item.id)
     },
     clickPagination (page) {
-      this.getNoteList({ page, userid: this.$auth.user.id })
+      this.currentPage = page
+      this.go()
       this.$router.push({ query: { page: this.currentPage } })
+    },
+    go () {
+      this.getNoteList({ page: this.currentPage, userid: this.$auth.user.id })
     },
     ...mapActions({
       getNoteList: 'note/getNoteList'
