@@ -1,14 +1,14 @@
 <template>
   <v-container>
-    <div>preparation</div>
+    <div>70인 첼린지</div>
   </v-container>
 </template>
 
 <script>
 export default {
-  name: 'PreparationPage',
+  name: 'ChallengesPage',
   head: {
-    title: '예배준비'
+    title: '70인 첼린지'
   }
 }
 </script>

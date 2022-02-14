@@ -8,6 +8,9 @@
     <v-row class="mb-10">
       {{ $moment(row.created_at).format('YYYY.MM.DD') }}
     </v-row>
+    <v-row class="mb-10">
+      {{ row.selected }}
+    </v-row>
     <v-row class="d-flex justify-center">
       <v-btn outlined small to="." class="ma-1">
         목록
@@ -26,10 +29,10 @@
 import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 
 export default {
-  name: 'NotesDetailPage',
+  name: 'PreparationsDetailPage',
   computed: {
     ...mapGetters({
-      row: 'note/getItemShow'
+      row: 'preparation/getItemShow'
     }),
     ...mapState({
     }),
@@ -38,21 +41,21 @@ export default {
     }
   },
   mounted () {
-    this.getNoteShow(this.$route.params.id)
+    this.getPreparationShow(this.$route.params.id)
   },
   methods: {
     onDestroy () {
-      this.deleteNote(this.$route.params.id).then((res) => {
+      this.deletePreparation(this.$route.params.id).then((res) => {
         if (res.status === 204) {
           this.$router.push({
-            path: '/' + this.$route.params.userid + '/notes'
+            path: '/' + this.$route.params.userid + '/preparations'
           })
         }
       })
     },
     ...mapActions({
-      getNoteShow: 'note/getNoteShow',
-      deleteNote: 'note/deleteNote'
+      getPreparationShow: 'preparation/getPreparationShow',
+      deletePreparation: 'preparation/deletePreparation'
     }),
     ...mapMutations({
     })

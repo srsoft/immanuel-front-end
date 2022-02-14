@@ -1,6 +1,6 @@
 <template>
   <v-container class="pa-10">
-    <h1>메시지 노트</h1>
+    <h1>예배준비</h1>
     <v-row>
       <v-spacer />
       <v-btn fab dark small color="cyan" :to="$route.path + '/write'">
@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      items: 'note/getItemList'
+      items: 'preparation/getItemList'
     }),
     ...mapState({
     })
@@ -82,10 +82,10 @@ export default {
       this.$router.push({ query: { page: this.currentPage } })
     },
     go () {
-      this.getNoteList({ page: this.currentPage, userid: this.$auth.user.id })
+      this.getPreparationList({ page: this.currentPage, userid: this.$auth.user.id })
     },
     ...mapActions({
-      getNoteList: 'note/getNoteList'
+      getPreparationList: 'preparation/getPreparationList'
     }),
     ...mapMutations({
     })

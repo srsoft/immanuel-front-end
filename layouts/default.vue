@@ -114,11 +114,11 @@ export default {
       drawer: null,
       listItemMenu1: [
         { icon: 'mdi-note', title: '메시지 노트', to: '/notes' },
-        { icon: 'mdi-account-multiple', title: '70인 첼린지', to: '/challenge' },
+        { icon: 'mdi-account-multiple', title: '70인 첼린지', to: '/challenges' },
         { icon: 'mdi-star', title: '말씀 즐겨찾기', to: '/favorites' }
       ],
       listItemMenu2: [
-        { icon: 'mdi-application-cog-outline', title: '예배준비', to: '/preparation' }
+        { icon: 'mdi-application-cog-outline', title: '예배준비', to: '/preparations' }
       ],
       listItemMenu3: [
         { icon: 'mdi-application-cog-outline', title: 'Services', to: '/services' },
