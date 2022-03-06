@@ -49,14 +49,14 @@ export default {
   methods: {
     fetchData () {
       this.loading = true
-      const url = process.env.BASE_URL + '/api/teams/' + this.$route.params.id
+      const url = process.env.BASE_URL + 'teams/' + this.$route.params.id
       this.$axios.$get(url).then((res) => {
         this.row = res.payload
         this.loading = false
       })
     },
     async onDestroy () {
-      const url = process.env.BASE_URL + '/api/teams/' + this.$route.params.id
+      const url = process.env.BASE_URL + 'teams/' + this.$route.params.id
       await this.$axios.$delete(url).then((res) => {
         if (res.status === 204) {
           this.$router.push({

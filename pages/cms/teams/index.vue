@@ -51,7 +51,7 @@ export default {
   methods: {
     fetchData () {
       this.loading = true
-      let url = process.env.BASE_URL + '/api/teams'
+      let url = process.env.BASE_URL + 'teams'
       if (this.nextUrl !== '' && this.nextUrl !== null) {
         url = this.nextUrl
       }

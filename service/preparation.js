@@ -1,4 +1,4 @@
-const item = process.env.API_URL + 'preparations'
+const item = process.env.BASE_URL + 'preparations'
 
 export default $axios => ({
 
@@ -16,7 +16,7 @@ export default $axios => ({
     formData.append('user_id', v.user_id)
     formData.append('title', v.title)
     formData.append('context', v.context)
-    formData.append('image', v.image)
+    if (v.image.size > 0) { formData.append('image', v.image) }
     return $axios.$post(`${item}`, formData, config)
   },
 

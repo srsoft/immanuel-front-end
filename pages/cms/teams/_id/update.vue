@@ -45,7 +45,7 @@ export default {
   methods: {
     fetchData () {
       this.loading = true
-      const url = process.env.BASE_URL + '/api/teams/' + this.$route.params.id
+      const url = process.env.BASE_URL + 'teams/' + this.$route.params.id
       this.$axios.$get(url).then((res) => {
         this.row = res.payload
         this.name = this.row.name
@@ -57,7 +57,7 @@ export default {
     },
     async onUpdate () {
       this.loading = true
-      const url = process.env.baseUrl + '/api/teams/' + this.$route.params.id + '?_method=PUT'
+      const url = process.env.BASE_URL + 'teams/' + this.$route.params.id + '?_method=PUT'
       const data = {
         name: this.name,
         // image: this.image,

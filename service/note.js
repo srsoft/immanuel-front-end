@@ -1,4 +1,4 @@
-const item = process.env.API_URL + 'notes'
+const item = process.env.BASE_URL + 'notes'
 
 export default $axios => ({
 
